@@ -41,11 +41,11 @@ async fn main() {
     let tm = TextureManager::new();
     let all_assets = ["assets/me.png", "assets/bhs.png", "assets/wow.png", "assets/wrestle.png"];
     tm.preload_with_loading_screen(&all_assets, None, None).await;
-    let img_out = StillImage::new(
+    let mut img_out = StillImage::new(
         "assets/me.png",
         300.0, // width
         300.0, // height
-        550.0, // x position
+        700.0, // x position
         60.0,  // y position
         true,  // Enable stretching
         1.0,   // Normal zoom (100%)
@@ -54,26 +54,27 @@ async fn main() {
 
     loop {
         clear_background(WHITE);
-        draw_grid(50.0, BROWN);
+       //draw_grid(50.0, BROWN);
         lbl_out.draw();
         img_out.draw();
         if btn_name.click() {
             lbl_out.set_text("Leo Smilovici");
-            img_out.set_preload("assets/me.png").await;
+            img_out.set_preload(tm.get_preload("assets/me.png").unwrap());
         }
 
         if btn_school.click() {
             lbl_out.set_text("Bowmanville High");
-            img_out.set_preload("assets/bhs.png").await;
+            img_out.set_preload(tm.get_preload("assets/bhs.png").unwrap());
         }
 
         if btn_sports.click() {
             lbl_out.set_text("I wrestle and play rugby.");
-            img_out.set_preload("assets/wrestle.png").await;
+            img_out.set_preload(tm.get_preload("assets/wrestle.png").unwrap());
         }
 
         if btn_games.click() {
             lbl_out.set_text("I play extraction shooter games and MMOs.");
+            img_out.set_preload(tm.get_preload("assets/wow.png").unwrap());
         }
 
         if btn_exit.click() {
