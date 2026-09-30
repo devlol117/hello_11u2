@@ -8,4 +8,4 @@ macroquad = "0.4.16"
 image = "0.25.10"
 [features]
 scale = []
-default = []
+default = ["scale"]
